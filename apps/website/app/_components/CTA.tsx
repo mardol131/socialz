@@ -26,9 +26,9 @@ export default function CTA() {
               </h2>
 
               <p className="text-lg text-zinc-400 leading-relaxed">
-                Přidejte se k tisícům spokojených zákazníků, kteří používají
-                naše šablony k růstu svého online podnikání. Získejte okamžitý
-                přístup ke kompletní knihovně.
+                Začněte vytvářet profesionální obsah na sociální sítě. Získejte
+                okamžitý přístup ke kompletní knihovně šablon a tvořte ještě
+                dnes.
               </p>
 
               {/* Benefits */}
@@ -78,31 +78,29 @@ export default function CTA() {
             <div className="grid grid-cols-2 gap-6">
               <div className="glass rounded-2xl p-6 text-center glass-hover">
                 <div className="text-4xl font-bold gradient-text mb-2">
-                  4.9/5
+                  <svg
+                    className="w-12 h-12 mx-auto text-emerald-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
                 </div>
-                <div className="text-sm text-zinc-400 mb-3">
-                  Hodnocení zákazníků
-                </div>
-                <div className="flex justify-center space-x-1">
-                  {[...Array(5)].map((_, i) => (
-                    <svg
-                      key={i}
-                      className="w-5 h-5 text-emerald-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
+                <div className="text-sm text-zinc-400 mt-3">
+                  Okamžitý přístup
                 </div>
               </div>
 
               <div className="glass rounded-2xl p-6 text-center glass-hover">
-                <div className="text-4xl font-bold gradient-text mb-2">
-                  10K+
-                </div>
+                <div className="text-4xl font-bold gradient-text mb-2">5</div>
                 <div className="text-sm text-zinc-400">
-                  Spokojených zákazníků
+                  Podporovaných platforem
                 </div>
               </div>
 
@@ -120,73 +118,6 @@ export default function CTA() {
                 <div className="text-sm text-zinc-400">Zákaznická podpora</div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Testimonials */}
-        <div className="mt-20">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Co říkají naši zákazníci
-            </h3>
-            <p className="text-zinc-400">
-              Přečtěte si zkušenosti spokojených uživatelů
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                name: "Marie Nováková",
-                role: "Social Media Manager",
-                content:
-                  "Tyto šablony mi ušetřily desítky hodin práce. Obsah vypadá profesionálně a náš engagement vzrostl o 150%!",
-                rating: 5,
-              },
-              {
-                name: "Petr Svoboda",
-                role: "Podnikatel",
-                content:
-                  "Konečně mohu tvořit kvalitní obsah bez nutnosti najímat designéra. Návratnost investice byla okamžitá.",
-                rating: 5,
-              },
-              {
-                name: "Jana Dvořáková",
-                role: "Influencer",
-                content:
-                  "Nejlepší investice do mého podnikání. Šablony jsou krásné a snadné na úpravu. Určitě doporučuji!",
-                rating: 5,
-              },
-            ].map((testimonial, index) => (
-              <div key={index} className="glass rounded-2xl p-6 glass-hover">
-                <div className="flex space-x-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <svg
-                      key={i}
-                      className="w-5 h-5 text-emerald-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-zinc-300 mb-4 italic">
-                  &ldquo;{testimonial.content}&rdquo;
-                </p>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-full bg-linear-to-br from-emerald-500 to-emerald-600" />
-                  <div>
-                    <div className="font-semibold text-white">
-                      {testimonial.name}
-                    </div>
-                    <div className="text-sm text-zinc-400">
-                      {testimonial.role}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

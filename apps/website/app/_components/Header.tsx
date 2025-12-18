@@ -1,13 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useCartStore } from "../_zustand/CartStore";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { items } = useCartStore((state) => state);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [mobileMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass">
+    <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 glass">
       <nav className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
@@ -33,10 +55,10 @@ export default function Header() {
               Šablony
             </Link>
             <Link
-              href="#pricing"
+              href="#try-it"
               className="text-zinc-300 hover:text-emerald-400 transition-colors"
             >
-              Ceník
+              Vyzkoušejte
             </Link>
             <Link
               href="#about"
@@ -64,7 +86,7 @@ export default function Header() {
                 />
               </svg>
               <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-semibold">
-                3
+                {items.length}
               </span>
             </Link>
 

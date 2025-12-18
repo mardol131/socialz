@@ -1,11 +1,215 @@
 "use client";
 
+import { useCartStore } from "@/app/_zustand/CartStore";
 import { useState } from "react";
-import Header from "../../_components/Header";
+
 import Footer from "../../_components/Footer";
 import TemplateCard from "../../_components/TemplateCard";
-import CatalogSidebar from "../../_components/CatalogSidebar";
 import TemplateDetailModal from "../../_components/TemplateDetailModal";
+import CatalogSidebar from "@/app/_components/CatalogSidebar";
+import MobileFilters from "@/app/_components/MobileFilters";
+const categories = [
+  { id: "instagram", label: "Instagram", count: 245 },
+  { id: "facebook", label: "Facebook", count: 156 },
+  { id: "linkedin", label: "LinkedIn", count: 98 },
+  { id: "pinterest", label: "Pinterest", count: 134 },
+  { id: "twitter", label: "Twitter", count: 87 },
+];
+
+const themes = [
+  { id: "business", label: "Business", count: 167 },
+  { id: "creative", label: "Kreativní", count: 203 },
+  { id: "minimal", label: "Minimalistické", count: 145 },
+  { id: "bold", label: "Výrazné", count: 112 },
+  { id: "elegant", label: "Elegantní", count: 98 },
+];
+
+const colors = [
+  { id: "blue", label: "Modrá", hex: "#3B82F6" },
+  { id: "red", label: "Červená", hex: "#EF4444" },
+  { id: "green", label: "Zelená", hex: "#10B981" },
+  { id: "purple", label: "Fialová", hex: "#8B5CF6" },
+  { id: "pink", label: "Růžová", hex: "#EC4899" },
+  { id: "orange", label: "Oranžová", hex: "#F59E0B" },
+];
+
+const ratios = [
+  { id: "1:1", label: "1:1 (Post)", count: 234 },
+  { id: "9:16", label: "9:16 (Story)", count: 189 },
+  { id: "16:9", label: "16:9 (YouTube)", count: 145 },
+  { id: "4:5", label: "4:5 (Portrait)", count: 123 },
+];
+
+const templates = [
+  {
+    id: 1,
+    title: "Modern Instagram Stories Pack",
+    category: "Instagram",
+    theme: "Kreativní",
+    price: 590,
+    originalPrice: 790,
+    image: "/templates/instagram-1.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#3B82F6", "#10B981"],
+    ratio: "9:16",
+    isNew: true,
+  },
+  {
+    id: 2,
+    title: "Professional LinkedIn Templates",
+    category: "LinkedIn",
+    theme: "Business",
+    price: 890,
+    originalPrice: null,
+    image: "/templates/linkedin-1.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#3B82F6", "#8B5CF6"],
+    ratio: "1:1",
+    isNew: false,
+  },
+  {
+    id: 3,
+    title: "Minimalist Instagram Posts",
+    category: "Instagram",
+    theme: "Minimalistické",
+    price: 690,
+    originalPrice: 890,
+    image: "/templates/instagram-2.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#EF4444", "#F59E0B"],
+    ratio: "1:1",
+    isNew: false,
+  },
+  {
+    id: 4,
+    title: "Pinterest Pin Bundle",
+    category: "Pinterest",
+    theme: "Kreativní",
+    price: 790,
+    originalPrice: null,
+    image: "/templates/pinterest-1.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#EC4899", "#8B5CF6"],
+    ratio: "4:5",
+    isNew: true,
+  },
+  {
+    id: 5,
+    title: "Bold Facebook Ads Templates",
+    category: "Facebook",
+    theme: "Výrazné",
+    price: 990,
+    originalPrice: 1290,
+    image: "/templates/facebook-1.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#EF4444", "#3B82F6"],
+    ratio: "1:1",
+    isNew: false,
+  },
+  {
+    id: 6,
+    title: "Elegant Social Media Bundle",
+    category: "Instagram",
+    theme: "Elegantní",
+    price: 1190,
+    originalPrice: null,
+    image: "/templates/bundle-1.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#8B5CF6", "#EC4899"],
+    ratio: "9:16",
+    isNew: true,
+  },
+  {
+    id: 7,
+    title: "Elegant Social Media Bundle",
+    category: "Instagram",
+    theme: "Elegantní",
+    price: 1190,
+    originalPrice: null,
+    image: "/templates/bundle-1.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#8B5CF6", "#EC4899"],
+    ratio: "9:16",
+    isNew: true,
+  },
+  {
+    id: 8,
+    title: "Elegant Social Media Bundle",
+    category: "Instagram",
+    theme: "Elegantní",
+    price: 1190,
+    originalPrice: null,
+    image: "/templates/bundle-1.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#8B5CF6", "#EC4899"],
+    ratio: "9:16",
+    isNew: true,
+  },
+  {
+    id: 9,
+    title: "Elegant Social Media Bundle",
+    category: "Instagram",
+    theme: "Elegantní",
+    price: 1190,
+    originalPrice: null,
+    image: "/templates/bundle-1.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#8B5CF6", "#EC4899"],
+    ratio: "9:16",
+    isNew: true,
+  },
+  {
+    id: 10,
+    title: "Elegant Social Media Bundle",
+    category: "Instagram",
+    theme: "Elegantní",
+    price: 1190,
+    originalPrice: null,
+    image: "/templates/bundle-1.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#8B5CF6", "#EC4899"],
+    ratio: "9:16",
+    isNew: true,
+  },
+  {
+    id: 11,
+    title: "Elegant Social Media Bundle",
+    category: "Instagram",
+    theme: "Elegantní",
+    price: 1190,
+    originalPrice: null,
+    image: "/templates/bundle-1.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#8B5CF6", "#EC4899"],
+    ratio: "9:16",
+    isNew: true,
+  },
+  {
+    id: 12,
+    title: "Elegant Social Media Bundle",
+    category: "Instagram",
+    theme: "Elegantní",
+    price: 1190,
+    originalPrice: null,
+    image: "/templates/bundle-1.jpg",
+    rating: 0,
+    reviews: 0,
+    colors: ["#8B5CF6", "#EC4899"],
+    ratio: "9:16",
+    isNew: true,
+  },
+];
 
 export default function CatalogPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -16,226 +220,18 @@ export default function CatalogPage() {
   const [sortBy, setSortBy] = useState("newest");
   const [selectedTemplate, setSelectedTemplate] = useState<number | null>(null);
   const [cartCount, setCartCount] = useState(0);
+  const { addItem } = useCartStore((state) => state);
 
-  const categories = [
-    { id: "instagram", label: "Instagram", count: 245 },
-    { id: "facebook", label: "Facebook", count: 156 },
-    { id: "linkedin", label: "LinkedIn", count: 98 },
-    { id: "pinterest", label: "Pinterest", count: 134 },
-    { id: "twitter", label: "Twitter", count: 87 },
-  ];
-
-  const themes = [
-    { id: "business", label: "Business", count: 167 },
-    { id: "creative", label: "Kreativní", count: 203 },
-    { id: "minimal", label: "Minimalistické", count: 145 },
-    { id: "bold", label: "Výrazné", count: 112 },
-    { id: "elegant", label: "Elegantní", count: 98 },
-  ];
-
-  const colors = [
-    { id: "blue", label: "Modrá", hex: "#3B82F6" },
-    { id: "red", label: "Červená", hex: "#EF4444" },
-    { id: "green", label: "Zelená", hex: "#10B981" },
-    { id: "purple", label: "Fialová", hex: "#8B5CF6" },
-    { id: "pink", label: "Růžová", hex: "#EC4899" },
-    { id: "orange", label: "Oranžová", hex: "#F59E0B" },
-  ];
-
-  const ratios = [
-    { id: "1:1", label: "1:1 (Post)", count: 234 },
-    { id: "9:16", label: "9:16 (Story)", count: 189 },
-    { id: "16:9", label: "16:9 (YouTube)", count: 145 },
-    { id: "4:5", label: "4:5 (Portrait)", count: 123 },
-  ];
-
-  const templates = [
-    {
-      id: 1,
-      title: "Modern Instagram Stories Pack",
-      category: "Instagram",
-      theme: "Kreativní",
-      price: 590,
-      originalPrice: 790,
-      image: "/templates/instagram-1.jpg",
-      rating: 4.8,
-      reviews: 124,
-      colors: ["#3B82F6", "#10B981"],
-      ratio: "9:16",
-      isNew: true,
-    },
-    {
-      id: 2,
-      title: "Professional LinkedIn Templates",
-      category: "LinkedIn",
-      theme: "Business",
-      price: 890,
-      originalPrice: null,
-      image: "/templates/linkedin-1.jpg",
-      rating: 4.9,
-      reviews: 98,
-      colors: ["#3B82F6", "#8B5CF6"],
-      ratio: "1:1",
-      isNew: false,
-    },
-    {
-      id: 3,
-      title: "Minimalist Instagram Posts",
-      category: "Instagram",
-      theme: "Minimalistické",
-      price: 690,
-      originalPrice: 890,
-      image: "/templates/instagram-2.jpg",
-      rating: 4.7,
-      reviews: 156,
-      colors: ["#EF4444", "#F59E0B"],
-      ratio: "1:1",
-      isNew: false,
-    },
-    {
-      id: 4,
-      title: "Pinterest Pin Bundle",
-      category: "Pinterest",
-      theme: "Kreativní",
-      price: 790,
-      originalPrice: null,
-      image: "/templates/pinterest-1.jpg",
-      rating: 4.8,
-      reviews: 87,
-      colors: ["#EC4899", "#8B5CF6"],
-      ratio: "4:5",
-      isNew: true,
-    },
-    {
-      id: 5,
-      title: "Bold Facebook Ads Templates",
-      category: "Facebook",
-      theme: "Výrazné",
-      price: 990,
-      originalPrice: 1290,
-      image: "/templates/facebook-1.jpg",
-      rating: 4.9,
-      reviews: 203,
-      colors: ["#EF4444", "#3B82F6"],
-      ratio: "1:1",
-      isNew: false,
-    },
-    {
-      id: 6,
-      title: "Elegant Social Media Bundle",
-      category: "Instagram",
-      theme: "Elegantní",
-      price: 1190,
-      originalPrice: null,
-      image: "/templates/bundle-1.jpg",
-      rating: 5.0,
-      reviews: 267,
-      colors: ["#8B5CF6", "#EC4899"],
-      ratio: "9:16",
-      isNew: true,
-    },
-    {
-      id: 6,
-      title: "Elegant Social Media Bundle",
-      category: "Instagram",
-      theme: "Elegantní",
-      price: 1190,
-      originalPrice: null,
-      image: "/templates/bundle-1.jpg",
-      rating: 5.0,
-      reviews: 267,
-      colors: ["#8B5CF6", "#EC4899"],
-      ratio: "9:16",
-      isNew: true,
-    },
-    {
-      id: 6,
-      title: "Elegant Social Media Bundle",
-      category: "Instagram",
-      theme: "Elegantní",
-      price: 1190,
-      originalPrice: null,
-      image: "/templates/bundle-1.jpg",
-      rating: 5.0,
-      reviews: 267,
-      colors: ["#8B5CF6", "#EC4899"],
-      ratio: "9:16",
-      isNew: true,
-    },
-    {
-      id: 6,
-      title: "Elegant Social Media Bundle",
-      category: "Instagram",
-      theme: "Elegantní",
-      price: 1190,
-      originalPrice: null,
-      image: "/templates/bundle-1.jpg",
-      rating: 5.0,
-      reviews: 267,
-      colors: ["#8B5CF6", "#EC4899"],
-      ratio: "9:16",
-      isNew: true,
-    },
-    {
-      id: 6,
-      title: "Elegant Social Media Bundle",
-      category: "Instagram",
-      theme: "Elegantní",
-      price: 1190,
-      originalPrice: null,
-      image: "/templates/bundle-1.jpg",
-      rating: 5.0,
-      reviews: 267,
-      colors: ["#8B5CF6", "#EC4899"],
-      ratio: "9:16",
-      isNew: true,
-    },
-    {
-      id: 6,
-      title: "Elegant Social Media Bundle",
-      category: "Instagram",
-      theme: "Elegantní",
-      price: 1190,
-      originalPrice: null,
-      image: "/templates/bundle-1.jpg",
-      rating: 5.0,
-      reviews: 267,
-      colors: ["#8B5CF6", "#EC4899"],
-      ratio: "9:16",
-      isNew: true,
-    },
-    {
-      id: 6,
-      title: "Elegant Social Media Bundle",
-      category: "Instagram",
-      theme: "Elegantní",
-      price: 1190,
-      originalPrice: null,
-      image: "/templates/bundle-1.jpg",
-      rating: 5.0,
-      reviews: 267,
-      colors: ["#8B5CF6", "#EC4899"],
-      ratio: "9:16",
-      isNew: true,
-    },
-  ];
-
-  const toggleFilter = (
-    selected: string[],
-    setSelected: (value: string[]) => void,
-    value: string
-  ) => {
-    if (selected.includes(value)) {
-      setSelected(selected.filter((item) => item !== value));
-    } else {
-      setSelected([...selected, value]);
-    }
+  const addToCardHandler = (item: {
+    id: string;
+    name: string;
+    price: number;
+  }) => {
+    addItem(item);
   };
 
   return (
     <div className="min-h-screen bg-zinc-950">
-      <Header />
-
       <main className="pt-24 pb-20">
         <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Page Header */}
@@ -275,8 +271,36 @@ export default function CatalogPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Sidebar - Filters */}
-            <CatalogSidebar
+            {/* Desktop Sidebar - Filters */}
+            <div className="hidden lg:block">
+              <CatalogSidebar
+                categories={categories}
+                themes={themes}
+                colors={colors}
+                ratios={ratios}
+                selectedCategories={selectedCategories}
+                selectedThemes={selectedThemes}
+                selectedColors={selectedColors}
+                selectedRatios={selectedRatios}
+                priceRange={priceRange}
+                onCategoryChange={setSelectedCategories}
+                onThemeChange={setSelectedThemes}
+                onColorChange={setSelectedColors}
+                onRatioChange={setSelectedRatios}
+                onPriceChange={setPriceRange}
+                onClearFilters={() => {
+                  setSelectedCategories([]);
+                  setSelectedThemes([]);
+                  setSelectedColors([]);
+                  setSelectedRatios([]);
+                  setPriceRange([0, 2000]);
+                }}
+                onApplyFilters={() => {}}
+              />
+            </div>
+
+            {/* Mobile Filters Modal */}
+            <MobileFilters
               categories={categories}
               themes={themes}
               colors={colors}
@@ -298,6 +322,7 @@ export default function CatalogPage() {
                 setSelectedRatios([]);
                 setPriceRange([0, 2000]);
               }}
+              onApplyFilters={() => {}}
             />
 
             {/* Main Content - Templates Grid */}
@@ -309,8 +334,11 @@ export default function CatalogPage() {
                     template={template}
                     onViewDetail={() => setSelectedTemplate(template.id)}
                     onAddToCart={() => {
-                      setCartCount(cartCount + 1);
-                      // Zde může být logika pro přidání do košíku
+                      addToCardHandler({
+                        id: template.id.toString(),
+                        name: template.title,
+                        price: template.price,
+                      });
                     }}
                   />
                 ))}

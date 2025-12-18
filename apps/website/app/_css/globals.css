@@ -44,3 +44,25 @@
     @apply border border-transparent bg-linear-to-r from-emerald-500/20 via-zinc-800 to-emerald-500/20 bg-origin-border;
   }
 }
+
+html,
+div {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-emerald-400) var(--color-zinc-700);
+}
+
+html::-webkit-scrollbar,
+div::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+html::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track {
+  background: #e4e4e7;
+}
+
+html::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb {
+  background-color: var(--color-emerald-400);
+  border-radius: 9999px;
+}

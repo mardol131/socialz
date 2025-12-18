@@ -56,7 +56,7 @@ export default function Hero() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 pt-12 max-w-4xl mx-auto">
             <div className="glass rounded-2xl p-6 glass-hover">
               <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
-                500+
+                200+
               </div>
               <div className="text-sm text-zinc-400">
                 Profesionálních šablon
@@ -64,9 +64,9 @@ export default function Hero() {
             </div>
             <div className="glass rounded-2xl p-6 glass-hover">
               <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
-                10K+
+                10+
               </div>
-              <div className="text-sm text-zinc-400">Spokojených zákazníků</div>
+              <div className="text-sm text-zinc-400">Nových šablon měsíčně</div>
             </div>
             <div className="glass rounded-2xl p-6 glass-hover">
               <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
@@ -78,7 +78,7 @@ export default function Hero() {
               <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
                 24/7
               </div>
-              <div className="text-sm text-zinc-400">Podpora zákazníkům</div>
+              <div className="text-sm text-zinc-400">Zákaznická podpora</div>
             </div>
           </div>
 

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useCartStore } from "@/app/_zustand/CartStore";
 
 interface CartItem {
   id: number;
@@ -14,55 +15,10 @@ interface CartItem {
 }
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: 1,
-      name: "Instagram Stories Pack - Premium",
-      platform: "Instagram",
-      price: 499,
-      quantity: 1,
-      image: "/placeholder.jpg",
-      license: "Komerční licence",
-    },
-    {
-      id: 2,
-      name: "Facebook Post Templates",
-      platform: "Facebook",
-      price: 299,
-      quantity: 2,
-      image: "/placeholder.jpg",
-      license: "Komerční licence",
-    },
-    {
-      id: 3,
-      name: "LinkedIn Carousel Set",
-      platform: "LinkedIn",
-      price: 399,
-      quantity: 1,
-      image: "/placeholder.jpg",
-      license: "Rozšířená licence",
-    },
-  ]);
+  const { items, removeItem } = useCartStore((state) => state);
 
-  const updateQuantity = (id: number, newQuantity: number) => {
-    if (newQuantity < 1) return;
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-
-  const removeItem = (id: number) => {
-    setCartItems((items) => items.filter((item) => item.id !== id));
-  };
-
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const subtotal = items.reduce((sum, item) => sum + item.price, 0);
   const tax = Math.round(subtotal * 0.21); // 21% DPH
-  const total = subtotal + tax;
 
   return (
     <div className="min-h-screen bg-zinc-950 pt-24 pb-20">
@@ -73,17 +29,17 @@ export default function CartPage() {
             Nákupní košík
           </h1>
           <p className="text-zinc-400">
-            {cartItems.length}{" "}
-            {cartItems.length === 1
+            {items.length}{" "}
+            {items.length === 1
               ? "položka"
-              : cartItems.length < 5
+              : items.length < 5
               ? "položky"
               : "položek"}{" "}
             v košíku
           </p>
         </div>
 
-        {cartItems.length === 0 ? (
+        {items.length === 0 ? (
           /* Empty Cart */
           <div className="glass rounded-2xl p-12 text-center">
             <div className="w-24 h-24 bg-zinc-800/50 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -131,7 +87,7 @@ export default function CartPage() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-4">
-              {cartItems.map((item) => (
+              {items.map((item) => (
                 <div
                   key={item.id}
                   className="glass rounded-xl p-6 hover:bg-zinc-900/50 transition-colors"
@@ -149,11 +105,11 @@ export default function CartPage() {
                           <h3 className="text-lg font-semibold text-zinc-100 mb-1">
                             {item.name}
                           </h3>
-                          <div className="flex items-center gap-3 text-sm text-zinc-400">
+                          {/* <div className="flex items-center gap-3 text-sm text-zinc-400">
                             <span>{item.platform}</span>
                             <span>•</span>
                             <span>{item.license}</span>
-                          </div>
+                          </div> */}
                         </div>
                         <button
                           onClick={() => removeItem(item.id)}
@@ -180,39 +136,18 @@ export default function CartPage() {
                         {/* Quantity */}
                         <div className="flex items-center gap-3">
                           <button
-                            onClick={() =>
-                              updateQuantity(item.id, item.quantity - 1)
-                            }
-                            className="w-8 h-8 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-300 hover:bg-zinc-800 transition-colors flex items-center justify-center"
+                            onClick={() => removeItem(item.id)}
+                            className=" p-2 rounded-lg font-semibold text-sm cursor-pointer  bg-zinc-800/50 border border-zinc-700/50 text-zinc-300 hover:bg-red-400/20 transition-colors flex items-center justify-center"
                           >
-                            −
-                          </button>
-                          <span className="text-zinc-100 font-medium w-8 text-center">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() =>
-                              updateQuantity(item.id, item.quantity + 1)
-                            }
-                            className="w-8 h-8 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-300 hover:bg-zinc-800 transition-colors flex items-center justify-center"
-                          >
-                            +
+                            Odebrat
                           </button>
                         </div>
 
                         {/* Price */}
                         <div className="text-right">
                           <div className="text-xl font-bold text-zinc-100">
-                            {(item.price * item.quantity).toLocaleString(
-                              "cs-CZ"
-                            )}{" "}
-                            Kč
+                            {item.price.toLocaleString("cs-CZ")} Kč
                           </div>
-                          {item.quantity > 1 && (
-                            <div className="text-sm text-zinc-500">
-                              {item.price.toLocaleString("cs-CZ")} Kč / ks
-                            </div>
-                          )}
                         </div>
                       </div>
                     </div>
@@ -261,7 +196,7 @@ export default function CartPage() {
                   <div className="h-px bg-zinc-800"></div>
                   <div className="flex justify-between text-lg font-bold text-zinc-100">
                     <span>Celkem</span>
-                    <span>{total.toLocaleString("cs-CZ")} Kč</span>
+                    <span>{subtotal.toLocaleString("cs-CZ")} Kč</span>
                   </div>
                 </div>
 

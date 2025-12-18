@@ -3,6 +3,11 @@ import Footer from "./_components/Footer";
 import Hero from "./_components/Hero";
 import Features from "./_components/Features";
 import Showcase from "./_components/Showcase";
+import HowItWorks from "./_components/HowItWorks";
+import TimeComparison from "./_components/TimeComparison";
+import PlatformShowcase from "./_components/PlatformShowcase";
+import TryDemo from "./_components/TryDemo";
+import AboutUs from "./_components/AboutUs";
 import CTA from "./_components/CTA";
 
 export const metadata = {
@@ -27,7 +32,12 @@ export default function Home() {
       <main>
         <Hero />
         <Features />
+        <HowItWorks />
         <Showcase />
+        <TimeComparison />
+        <PlatformShowcase />
+        <TryDemo />
+        <AboutUs />
         <CTA />
       </main>
       <Footer />

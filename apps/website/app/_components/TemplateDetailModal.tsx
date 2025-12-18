@@ -29,19 +29,25 @@ export default function TemplateDetailModal({
 }: TemplateDetailModalProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  // Mock obrázky
-  const images = [
-    { id: 1, alt: "Preview 1" },
-    { id: 2, alt: "Preview 2" },
-    { id: 3, alt: "Preview 3" },
-    { id: 4, alt: "Preview 4" },
-  ];
+  // Mock obrázky - 15 náhledů
+  const images = Array.from({ length: 15 }, (_, i) => ({
+    id: i + 1,
+    alt: `Preview ${i + 1}`,
+  }));
+
+  const nextImage = () => {
+    setSelectedImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setSelectedImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   if (!isOpen) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 max-md:p-0 bg-black/80 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
@@ -51,7 +57,7 @@ export default function TemplateDetailModal({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full glass-hover flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+          className="absolute max-md:top-6 max-md:right-6 top-9 right-9 lg:top-6 lg:right-6 z-10 w-10 h-10 rounded-full glass-hover flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
         >
           <svg
             className="w-6 h-6"
@@ -68,11 +74,11 @@ export default function TemplateDetailModal({
           </svg>
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8 max-md:p-4">
           {/* Left Side - Images */}
           <div className="space-y-4">
             {/* Main Image */}
-            <div className="relative aspect-square rounded-2xl bg-linear-to-br from-zinc-800 to-zinc-900 overflow-hidden">
+            <div className="relative aspect-square rounded-2xl bg-linear-to-br from-zinc-800 to-zinc-900 overflow-hidden group">
               <div className="absolute inset-0 bg-linear-to-br from-zinc-700/30 to-transparent" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <svg
@@ -92,38 +98,68 @@ export default function TemplateDetailModal({
               <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full glass border border-emerald-500/30 text-sm font-semibold text-emerald-400">
                 {selectedImageIndex + 1} / {images.length}
               </div>
+
+              {/* Navigation Arrows */}
+              <button
+                onClick={prevImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-hover flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity hover:scale-110"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-hover flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity hover:scale-110"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
             </div>
 
-            {/* Thumbnails */}
-            <div className="grid grid-cols-4 gap-3">
-              {images.map((image, index) => (
-                <button
-                  key={image.id}
-                  onClick={() => setSelectedImageIndex(index)}
-                  className={`relative aspect-square rounded-lg bg-linear-to-br from-zinc-800 to-zinc-900 overflow-hidden transition-all ${
-                    selectedImageIndex === index
-                      ? "ring-2 ring-emerald-500 scale-105"
-                      : "hover:scale-105 opacity-70 hover:opacity-100"
-                  }`}
-                >
-                  <div className="absolute inset-0 bg-linear-to-br from-zinc-700/30 to-transparent" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg
-                      className="w-8 h-8 text-zinc-700"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                  </div>
-                </button>
-              ))}
+            {/* Thumbnails - Scrollable Grid */}
+            <div className="relative">
+              <div className="grid grid-cols-5 gap-2 max-h-48 overflow-y-auto p-2">
+                {images.map((image, index) => (
+                  <button
+                    key={image.id}
+                    onClick={() => setSelectedImageIndex(index)}
+                    className={`relative aspect-square rounded-lg bg-linear-to-br from-zinc-800 to-zinc-900 overflow-hidden transition-all ${
+                      selectedImageIndex === index
+                        ? "ring-2 ring-emerald-500 scale-105"
+                        : "hover:scale-105 opacity-70 hover:opacity-100"
+                    }`}
+                  >
+                    <div className="absolute inset-0 bg-linear-to-br from-zinc-700/30 to-transparent" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-xs text-zinc-500 font-semibold">
+                        {index + 1}
+                      </span>
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -245,7 +281,7 @@ export default function TemplateDetailModal({
             </div>
 
             {/* Price and CTA */}
-            <div className="sticky bottom-0 pt-6 border-t border-zinc-800/50 mt-6 space-y-4">
+            <div className=" glass rounded-xl p-4 bottom-0 pt-6 border-t border-zinc-800/50 mt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   {template.originalPrice && (
