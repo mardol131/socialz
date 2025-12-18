@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 220 13% 9%;
+    --foreground: 210 20% 98%;
+    --primary: 160 84% 39%;
+    --primary-foreground: 210 20% 98%;
+    --muted: 220 13% 18%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 160 84% 39%;
+    --accent-foreground: 210 20% 98%;
+  }
+
+  * {
+    @apply border-zinc-800;
+  }
+
+  body {
+    @apply bg-zinc-950 text-zinc-100;
+    background-image: radial-gradient(
+        at 0% 0%,
+        rgba(63, 63, 70, 0.3) 0px,
+        transparent 50%
+      ),
+      radial-gradient(at 100% 100%, rgba(63, 63, 70, 0.2) 0px, transparent 50%);
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 shadow-2xl;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:bg-zinc-900/60 hover:border-emerald-500/30;
+  }
+
+  .gradient-text {
+    @apply bg-linear-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    @apply border border-transparent bg-linear-to-r from-emerald-500/20 via-zinc-800 to-emerald-500/20 bg-origin-border;
+  }
+}
