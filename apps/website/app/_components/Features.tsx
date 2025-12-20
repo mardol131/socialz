@@ -1,121 +1,44 @@
+import { HiOutlinePhotograph } from "react-icons/hi";
+import { MdEdit } from "react-icons/md";
+import { IoFlashSharp } from "react-icons/io5";
+import { BiTime } from "react-icons/bi";
+import { FiRefreshCw } from "react-icons/fi";
+import { BsPhone } from "react-icons/bs";
+
 export default function Features() {
   const features = [
     {
-      icon: (
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-          />
-        </svg>
-      ),
+      icon: <HiOutlinePhotograph className="w-8 h-8" />,
       title: "Profesionální design",
       description:
         "Všechny šablony navrženy profesionálními grafickými designéry s důrazem na moderní trendy a vizuální dopad.",
     },
     {
-      icon: (
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-          />
-        </svg>
-      ),
+      icon: <MdEdit className="w-8 h-8" />,
       title: "Plně upravitelné v Canvě",
       description:
         "Okamžitý přístup k šablonám v Canvě. Měňte barvy, fonty, obrázky a text podle vašich potřeb jedním kliknutím.",
     },
     {
-      icon: (
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M13 10V3L4 14h7v7l9-11h-7z"
-          />
-        </svg>
-      ),
+      icon: <IoFlashSharp className="w-8 h-8" />,
       title: "Okamžité stažení",
       description:
         "Po nákupu získáte okamžitý přístup ke všem šablonám. Žádné čekání, začněte tvořit hned.",
     },
     {
-      icon: (
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-          />
-        </svg>
-      ),
+      icon: <BsPhone className="w-8 h-8" />,
       title: "Optimalizováno pro všechny platformy",
       description:
         "Instagram, Facebook, LinkedIn, Pinterest a další. Správné rozměry a formáty pro každou sociální síť.",
     },
     {
-      icon: (
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      ),
+      icon: <BiTime className="w-8 h-8" />,
       title: "Ušetřete čas a peníze",
       description:
         "Namísto hodin strávených designováním nebo placením designéra, vytvořte profesionální obsah za pár minut.",
     },
     {
-      icon: (
-        <svg
-          className="w-8 h-8"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-          />
-        </svg>
-      ),
+      icon: <FiRefreshCw className="w-8 h-8" />,
       title: "Pravidelné aktualizace",
       description:
         "Přístup k novým šablonám každý měsíc. Udržujte váš obsah čerstvý a v souladu s nejnovějšími trendy.",

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FiChevronDown } from "react-icons/fi";
 
 export default function Hero() {
   return (
@@ -95,19 +96,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <svg
-          className="w-6 h-6 text-emerald-400"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-          />
-        </svg>
+        <FiChevronDown className="w-6 h-6 text-emerald-400" />
       </div>
     </section>
   );

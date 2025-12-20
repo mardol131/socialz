@@ -1,72 +1,65 @@
 "use client";
 
 import PriceFilter from "./filters/PriceFilter";
-import CheckboxFilter from "./filters/CheckboxFilter";
-import ColorFilter from "./filters/ColorFilter";
+import CheckboxFilter, { CheckboxItem } from "./filters/CheckboxFilter";
+import ColorFilter, { ColorItem } from "./filters/ColorFilter";
+import { Range, useFiltersStore } from "../_zustand/FilterStore";
 
 interface CatalogSidebarProps {
-  categories: Array<{ id: string; label: string; count: number }>;
-  themes: Array<{ id: string; label: string; count: number }>;
-  colors: Array<{ id: string; label: string; hex: string }>;
-  ratios: Array<{ id: string; label: string; count: number }>;
-  selectedCategories: string[];
-  selectedThemes: string[];
-  selectedColors: string[];
-  selectedRatios: string[];
-  priceRange: [number, number];
-  onCategoryChange: (categories: string[]) => void;
-  onThemeChange: (themes: string[]) => void;
-  onColorChange: (colors: string[]) => void;
-  onRatioChange: (ratios: string[]) => void;
-  onPriceChange: (range: [number, number]) => void;
-  onClearFilters: () => void;
+  themes: CheckboxItem[];
+  colors: ColorItem[];
+  ratios: CheckboxItem[];
+  socials: CheckboxItem[];
   onApplyFilters: () => void;
 }
 
 export default function CatalogSidebar({
-  categories,
   themes,
   colors,
   ratios,
-  selectedCategories,
-  selectedThemes,
-  selectedColors,
-  selectedRatios,
-  priceRange,
-  onCategoryChange,
-  onThemeChange,
-  onColorChange,
-  onRatioChange,
-  onPriceChange,
-  onClearFilters,
+  socials,
   onApplyFilters,
 }: CatalogSidebarProps) {
+  const {
+    selectedThemes,
+    selectedColors,
+    selectedRatios,
+    selectedSocials,
+    priceRange,
+    setPriceRange,
+    setSelectedThemes,
+    setSelectedColors,
+    setSelectedRatios,
+    setSelectedSocials,
+    clearFilters,
+  } = useFiltersStore();
+
   return (
     <div className="top-24 space-y-6">
       {/* Price Filter */}
-      <PriceFilter priceRange={priceRange} onPriceChange={onPriceChange} />
+      <PriceFilter priceRange={priceRange} onPriceChange={setPriceRange} />
 
       {/* Categories Filter */}
-      <CheckboxFilter
+      {/* <CheckboxFilter
         title="Kategorie"
         items={categories}
         selectedItems={selectedCategories}
         onItemChange={onCategoryChange}
-      />
+      /> */}
 
       {/* Themes Filter */}
       <CheckboxFilter
         title="Témata"
         items={themes}
         selectedItems={selectedThemes}
-        onItemChange={onThemeChange}
+        onItemChange={setSelectedThemes}
       />
 
       {/* Colors Filter */}
       <ColorFilter
         colors={colors}
         selectedColors={selectedColors}
-        onColorChange={onColorChange}
+        onColorChange={setSelectedColors}
       />
 
       {/* Aspect Ratio Filter */}
@@ -74,7 +67,15 @@ export default function CatalogSidebar({
         title="Poměr stran"
         items={ratios}
         selectedItems={selectedRatios}
-        onItemChange={onRatioChange}
+        onItemChange={setSelectedRatios}
+      />
+
+      {/* Aspect Ratio Filter */}
+      <CheckboxFilter
+        title="Sociální sítě"
+        items={socials}
+        selectedItems={selectedSocials}
+        onItemChange={setSelectedSocials}
       />
       <div className="sticky bottom-0 bg-zinc-950 border-t border-zinc-800/50 py-4">
         <button
@@ -88,7 +89,7 @@ export default function CatalogSidebar({
       </div>
       {/* Clear Filters */}
       <button
-        onClick={onClearFilters}
+        onClick={clearFilters}
         className="w-full px-6 py-3 rounded-lg glass glass-hover text-zinc-300 hover:text-white font-medium transition-colors"
       >
         Vymazat filtry

@@ -1,9 +1,15 @@
 interface CheckboxFilterProps {
   title: string;
-  items: Array<{ id: string; label: string; count: number }>;
-  selectedItems: string[];
-  onItemChange: (items: string[]) => void;
+  items: CheckboxItem[];
+  selectedItems: CheckboxItem[];
+  onItemChange: (items: CheckboxItem[]) => void;
 }
+
+export type CheckboxItem = {
+  id: string;
+  label: string;
+  count?: number;
+};
 
 export default function CheckboxFilter({
   title,
@@ -11,11 +17,11 @@ export default function CheckboxFilter({
   selectedItems,
   onItemChange,
 }: CheckboxFilterProps) {
-  const toggleFilter = (value: string) => {
-    if (selectedItems.includes(value)) {
-      onItemChange(selectedItems.filter((item) => item !== value));
+  const toggleFilter = (item: CheckboxItem) => {
+    if (selectedItems.includes(item)) {
+      onItemChange(selectedItems.filter((i) => i.id !== item.id));
     } else {
-      onItemChange([...selectedItems, value]);
+      onItemChange([...selectedItems, item]);
     }
   };
 
@@ -31,15 +37,19 @@ export default function CheckboxFilter({
             <div className="flex items-center gap-3">
               <input
                 type="checkbox"
-                checked={selectedItems.includes(item.id)}
-                onChange={() => toggleFilter(item.id)}
+                checked={selectedItems.some(
+                  (selected) => selected.id === item.id
+                )}
+                onChange={() => toggleFilter(item)}
                 className="w-4 h-4 rounded border-zinc-700 bg-zinc-800 text-emerald-500 focus:ring-emerald-500/50"
               />
               <span className="text-zinc-300 group-hover:text-white transition-colors">
                 {item.label}
               </span>
             </div>
-            <span className="text-sm text-zinc-500">{item.count}</span>
+            {item.count && item.count > 0 && (
+              <span className="text-sm text-zinc-500">{item.count}</span>
+            )}
           </label>
         ))}
       </div>

@@ -1,3 +1,6 @@
+import { FiCheck } from "react-icons/fi";
+import { IoFlashSharp } from "react-icons/io5";
+
 export default function CTA() {
   return (
     <section className="relative py-20 md:py-32">
@@ -41,19 +44,7 @@ export default function CTA() {
                 ].map((benefit, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     <div className="shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                      <svg
-                        className="w-4 h-4 text-emerald-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
+                      <FiCheck className="w-4 h-4 text-emerald-400" />
                     </div>
                     <span className="text-zinc-300">{benefit}</span>
                   </div>
@@ -78,19 +69,7 @@ export default function CTA() {
             <div className="grid grid-cols-2 gap-6">
               <div className="glass rounded-2xl p-6 text-center glass-hover">
                 <div className="text-4xl font-bold gradient-text mb-2">
-                  <svg
-                    className="w-12 h-12 mx-auto text-emerald-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
+                  <IoFlashSharp className="w-12 h-12 mx-auto text-emerald-400" />
                 </div>
                 <div className="text-sm text-zinc-400 mt-3">
                   Okamžitý přístup

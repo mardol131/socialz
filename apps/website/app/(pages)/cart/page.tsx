@@ -2,6 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import {
+  FiShoppingBag,
+  FiArrowRight,
+  FiArrowLeft,
+  FiCheck,
+  FiX,
+} from "react-icons/fi";
 import { useCartStore } from "@/app/_zustand/CartStore";
 
 interface CartItem {
@@ -43,19 +50,7 @@ export default function CartPage() {
           /* Empty Cart */
           <div className="glass rounded-2xl p-12 text-center">
             <div className="w-24 h-24 bg-zinc-800/50 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg
-                className="w-12 h-12 text-zinc-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                />
-              </svg>
+              <FiShoppingBag className="w-12 h-12 text-zinc-500" />
             </div>
             <h2 className="text-2xl font-bold text-zinc-100 mb-3">
               Váš košík je prázdný
@@ -68,19 +63,7 @@ export default function CartPage() {
               className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-emerald-600 to-emerald-500 text-white rounded-lg font-medium hover:from-emerald-500 hover:to-emerald-400 transition-all"
             >
               Přejít do katalogu
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
+              <FiArrowRight className="w-5 h-5" />
             </Link>
           </div>
         ) : (
@@ -116,19 +99,7 @@ export default function CartPage() {
                           className="text-zinc-500 hover:text-red-400 transition-colors p-1"
                           aria-label="Odstranit"
                         >
-                          <svg
-                            className="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M6 18L18 6M6 6l12 12"
-                            />
-                          </svg>
+                          <FiX className="w-5 h-5" />
                         </button>
                       </div>
 
@@ -160,19 +131,7 @@ export default function CartPage() {
                 href="/catalog"
                 className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors mt-4"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
+                <FiArrowLeft className="w-5 h-5" />
                 Pokračovat v nákupu
               </Link>
             </div>
@@ -202,68 +161,20 @@ export default function CartPage() {
 
                 <button className="w-full px-6 py-4 bg-linear-to-r from-emerald-600 to-emerald-500 text-white rounded-lg font-semibold hover:from-emerald-500 hover:to-emerald-400 transition-all mb-4 flex items-center justify-center gap-2">
                   Přejít k platbě
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
+                  <FiArrowRight className="w-5 h-5" />
                 </button>
 
                 <div className="space-y-3 text-sm text-zinc-400">
                   <div className="flex items-start gap-2">
-                    <svg
-                      className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+                    <FiCheck className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                     <span>Okamžitý přístup po platbě</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <svg
-                      className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+                    <FiCheck className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                     <span>Bezpečná platba přes Stripe</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <svg
-                      className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+                    <FiCheck className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                     <span>Doživotní aktualizace zdarma</span>
                   </div>
                 </div>

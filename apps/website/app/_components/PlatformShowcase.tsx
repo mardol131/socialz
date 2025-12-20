@@ -6,6 +6,7 @@ import {
   FaPinterestP,
 } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
+import { FiArrowRight } from "react-icons/fi";
 
 export default function PlatformShowcase() {
   const platforms = [
@@ -217,19 +218,7 @@ export default function PlatformShowcase() {
             className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-emerald-600 to-emerald-500 text-white rounded-lg font-semibold hover:from-emerald-500 hover:to-emerald-400 transition-all group"
           >
             Prohlédnout všechny šablony
-            <svg
-              className="w-5 h-5 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
+            <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>

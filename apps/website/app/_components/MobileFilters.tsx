@@ -4,50 +4,42 @@ import { useState } from "react";
 import { FaSlidersH } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import PriceFilter from "./filters/PriceFilter";
-import CheckboxFilter from "./filters/CheckboxFilter";
-import ColorFilter from "./filters/ColorFilter";
+import CheckboxFilter, { CheckboxItem } from "./filters/CheckboxFilter";
+import ColorFilter, { ColorItem } from "./filters/ColorFilter";
+import { Range, useFiltersStore } from "../_zustand/FilterStore";
 
 interface MobileFiltersProps {
-  categories: Array<{ id: string; label: string; count: number }>;
-  themes: Array<{ id: string; label: string; count: number }>;
-  colors: Array<{ id: string; label: string; hex: string }>;
-  ratios: Array<{ id: string; label: string; count: number }>;
-  selectedCategories: string[];
-  selectedThemes: string[];
-  selectedColors: string[];
-  selectedRatios: string[];
-  priceRange: [number, number];
-  onCategoryChange: (categories: string[]) => void;
-  onThemeChange: (themes: string[]) => void;
-  onColorChange: (colors: string[]) => void;
-  onRatioChange: (ratios: string[]) => void;
-  onPriceChange: (range: [number, number]) => void;
-  onClearFilters: () => void;
+  themes: CheckboxItem[];
+  colors: ColorItem[];
+  ratios: CheckboxItem[];
+  socials: CheckboxItem[];
   onApplyFilters: () => void;
 }
 
 export default function MobileFilters({
-  categories,
   themes,
   colors,
   ratios,
-  selectedCategories,
-  selectedThemes,
-  selectedColors,
-  selectedRatios,
-  priceRange,
-  onCategoryChange,
-  onThemeChange,
-  onColorChange,
-  onRatioChange,
-  onPriceChange,
-  onClearFilters,
+  socials,
   onApplyFilters,
 }: MobileFiltersProps) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const {
+    selectedThemes,
+    selectedColors,
+    selectedRatios,
+    selectedSocials,
+    priceRange,
+    setPriceRange,
+    setSelectedThemes,
+    setSelectedColors,
+    setSelectedRatios,
+    setSelectedSocials,
+    clearFilters,
+  } = useFiltersStore();
+
   const activeFiltersCount =
-    selectedCategories.length +
     selectedThemes.length +
     selectedColors.length +
     selectedRatios.length +
@@ -87,7 +79,7 @@ export default function MobileFilters({
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => {
-                      onClearFilters();
+                      clearFilters();
                       setIsOpen(false);
                     }}
                     className="text-sm text-emerald-400 hover:text-emerald-300 font-medium"
@@ -109,30 +101,30 @@ export default function MobileFilters({
               {/* Price Filter */}
               <PriceFilter
                 priceRange={priceRange}
-                onPriceChange={onPriceChange}
+                onPriceChange={setPriceRange}
               />
 
               {/* Categories Filter */}
-              <CheckboxFilter
+              {/* <CheckboxFilter
                 title="Kategorie"
                 items={categories}
                 selectedItems={selectedCategories}
                 onItemChange={onCategoryChange}
-              />
+              /> */}
 
               {/* Themes Filter */}
               <CheckboxFilter
                 title="Témata"
                 items={themes}
                 selectedItems={selectedThemes}
-                onItemChange={onThemeChange}
+                onItemChange={setSelectedThemes}
               />
 
               {/* Colors Filter */}
               <ColorFilter
                 colors={colors}
                 selectedColors={selectedColors}
-                onColorChange={onColorChange}
+                onColorChange={setSelectedColors}
               />
 
               {/* Ratios Filter */}
@@ -140,7 +132,15 @@ export default function MobileFilters({
                 title="Poměr stran"
                 items={ratios}
                 selectedItems={selectedRatios}
-                onItemChange={onRatioChange}
+                onItemChange={setSelectedRatios}
+              />
+
+              {/* Ratios Filter */}
+              <CheckboxFilter
+                title="Sociální sítě"
+                items={socials}
+                selectedItems={selectedSocials}
+                onItemChange={setSelectedSocials}
               />
             </div>
 

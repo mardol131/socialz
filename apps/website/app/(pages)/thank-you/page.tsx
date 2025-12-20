@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FiCheck, FiInfo, FiArrowRight } from "react-icons/fi";
 
 export default function ThankYouPage() {
   return (
@@ -8,19 +9,7 @@ export default function ThankYouPage() {
           {/* Success Icon */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-500/20 border-2 border-emerald-500/50 mb-6">
-              <svg
-                className="w-10 h-10 text-emerald-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
+              <FiCheck className="w-10 h-10 text-emerald-400" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-zinc-100 mb-4">
               Děkujeme za Vaši objednávku!
@@ -107,19 +96,7 @@ export default function ThankYouPage() {
             {/* Additional Info */}
             <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-6">
               <div className="flex items-start gap-3">
-                <svg
-                  className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+                <FiInfo className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-0.5" />
                 <div>
                   <h3 className="font-semibold text-zinc-100 mb-2">
                     Důležité informace
@@ -158,19 +135,7 @@ export default function ThankYouPage() {
               className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-emerald-600 to-emerald-500 text-white rounded-lg font-semibold hover:from-emerald-500 hover:to-emerald-400 transition-all"
             >
               Prohlédnout další šablony
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
+              <FiArrowRight className="w-5 h-5" />
             </Link>
             <Link
               href="/"

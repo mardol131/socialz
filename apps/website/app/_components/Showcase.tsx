@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 import TemplateCard from "./TemplateCard";
 import TemplateDetailModal from "./TemplateDetailModal";
 import { useCartStore } from "../_zustand/CartStore";
@@ -202,19 +203,7 @@ export default function Showcase() {
             className="inline-flex items-center space-x-2 px-8 py-4 rounded-lg glass glass-hover font-semibold text-white transition-all group"
           >
             <span>Zobrazit všechny šablony</span>
-            <svg
-              className="w-5 h-5 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
+            <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>

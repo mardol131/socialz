@@ -1,4 +1,5 @@
 import { FaDownload, FaCheckCircle, FaFileArchive } from "react-icons/fa";
+import { FiLock } from "react-icons/fi";
 import { IoSparkles } from "react-icons/io5";
 
 export default function TryDemo() {
@@ -125,19 +126,7 @@ export default function TryDemo() {
                   </a>
 
                   <div className="flex items-center justify-center gap-2 text-xs text-zinc-500">
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                      />
-                    </svg>
+                    <FiLock className="w-4 h-4" />
                     <span>Bezpečné stažení</span>
                     <span>•</span>
                     <span>Bez virů</span>
